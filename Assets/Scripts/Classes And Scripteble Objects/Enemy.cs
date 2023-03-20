@@ -1,0 +1,11 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "New Enemy", menuName = "Create New Enemy")]
+public class Enemy : ScriptableObject
+{
+    public int id;
+    public float speed;
+    public float health;
+}
