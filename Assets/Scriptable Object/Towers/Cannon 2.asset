@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 288186993b80aa946bf91c00bb974d19, type: 3}
-  m_Name: Cannon
+  m_Name: Cannon 2
   m_EditorClassIdentifier: 
-  color: {r: 1, g: 0, b: 0, a: 1}
+  color: {r: 0.34877178, g: 0.37755358, b: 0.9150943, a: 1}
   range: 0
   secondsBetweenShoots: 0
   projectile: {fileID: 0}
