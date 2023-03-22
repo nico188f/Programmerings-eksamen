@@ -9,6 +9,11 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private int mapWidth;
     [SerializeField] private int mapHight;
 
+    private void Start()
+    {
+        generateMap();
+    }
+
     private void generateMap()
     {
         for(int y = 0; y < mapHight; y++)
