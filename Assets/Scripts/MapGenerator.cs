@@ -52,8 +52,5 @@ public class MapGenerator : MonoBehaviour
         } 
 
         List<GameObject> topEdgeTiles = getTopEdgeTiles();
-
-        Destroy(topEdgeTiles[0]);
-        Destroy(mapTiles[34]);
     }
 }
