@@ -6,12 +6,11 @@ public class MapGenerator : MonoBehaviour
 {
     public GameObject MapTile;
 
-    [SerializeField] private int mapWidth;
-    [SerializeField] private int mapHight;
+    public int mapWidth;
+    public int mapHight;
 
     static public List<GameObject> mapTiles = new List<GameObject>();
     private List<GameObject> pathTiles = new List<GameObject>();
-
 
     private void Start()
     {
