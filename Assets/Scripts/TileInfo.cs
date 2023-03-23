@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class TileInfo : MonoBehaviour
 {
-    public int id;
-    public List<int> NeighborIds = new List<int>();
-    public List<int> LegalNeighborIds = new List<int>();
+    public int tileID;
+    public List<int> NeighborIDs = new List<int>();
+    public List<int> WalkebleNeighborIDs = new List<int>();
 
+    public void EnebleNode()
+    {
+        foreach (int neighborID in NeighborIDs)
+        {
+            MapGenerator.mapTiles[neighborID].GetComponent<TileInfo>().WalkebleNeighborIDs.Add(tileID);
+        }
+    }
 
 
 
