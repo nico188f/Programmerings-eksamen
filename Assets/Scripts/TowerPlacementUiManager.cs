@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class TowerPlacementUiManager : MonoBehaviour
 {
-    static public Tower SelectedTower;
+    [SerializeField] static public Tower SelectedTower;
     public List<Tower> Towers = new List<Tower>();
     public GameObject TowerBtn;
 
