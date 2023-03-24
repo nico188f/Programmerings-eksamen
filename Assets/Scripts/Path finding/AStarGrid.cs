@@ -17,11 +17,12 @@ public class AStarGrid : MonoBehaviour
 
     {
         nodeDiameter = nodeRadius * 2;
-        gridSizeX = Mathf.RoundToInt(map.mapWidth / nodeDiameter);
-        gridSizeY = Mathf.RoundToInt(map.mapHight / nodeDiameter);
+        gridSizeX = Mathf.RoundToInt(map.mapWidth/ nodeRadius);
+        gridSizeY = Mathf.RoundToInt(map.mapHight / nodeRadius);
         CreateGrid();
 
     }
+
     void CreateGrid()
     {
         grid = new Node[map.mapWidth, map.mapHight];
@@ -32,9 +33,45 @@ public class AStarGrid : MonoBehaviour
             {
                 Vector3 worldPos = new Vector3(x, y, 0);
                 bool walkable = !(Physics2D.OverlapCircle(new Vector2(x, y), 0.5f, unwalkableMask));
-                grid[x, y] = new Node(walkable, worldPos);
+                grid[x, y] = new Node(walkable, worldPos, x,y); 
             }
         }
+    }
+
+    public void CheckGrid()
+    {
+        for (int x = 0; x < map.mapWidth; x++)
+        {
+            for (int y = 0; y < map.mapHight; y++)
+            {
+                Vector3 worldPos = new Vector3(x, y, 0);
+                bool _walkable = !(Physics2D.OverlapCircle(new Vector2(x, y), 0.5f, unwalkableMask));
+                Node n = NodeFromWorldPoint(worldPos);
+                n.walkable = _walkable;
+            }
+        }
+    }
+    public List<Node> GetNeighbors(Node node)
+    {
+        List<Node> neighbors = new List<Node>();
+        for (int x=-1; x<=1; x++)
+        {
+            for (int y = -1; y <= 1; y++)
+            {
+                if (x == 0 && y == 0)
+                    continue;
+                int checkX = node.gridX + x;
+                int checkY = node.gridY + y;
+
+                if (checkX >= 0 && checkX < gridSizeX && checkY >=0 && checkY <gridSizeY)
+                {
+                    neighbors.Add(grid[checkX, checkY]);
+                    
+                }
+            }
+
+        }
+        return neighbors;
     }
     public Node NodeFromWorldPoint(Vector3 Worldposition)
     {
@@ -46,24 +83,27 @@ public class AStarGrid : MonoBehaviour
 
 
     }
+    public List<Node> path;
 
-    private void OnDrawGizmos()
+    void OnDrawGizmos()
     {
-        if (grid == null)
-            return;
-
         Gizmos.DrawWireCube(transform.position, new Vector3(map.mapWidth, map.mapHight, 0));
-        Node enemy1 = NodeFromWorldPoint(enemies[0].position);
-        Node enemy2 = NodeFromWorldPoint(enemies[1].position);
-        foreach (Node n in grid)
+
+        if (grid != null)
         {
-            Gizmos.color = (n.walkable) ? Color.white : Color.red;
-            if (enemy1 == n || enemy2 == n)
+            foreach(Node n in grid)
             {
-                Gizmos.color = Color.cyan;
+                Gizmos.color = (n.walkable) ? Color.white : Color.red;
+                if(path != null)
+                {
+                    if (path.Contains(n))
+                        Gizmos.color = Color.black;
+                }
+
+                Gizmos.DrawCube(n.worldPos, new Vector3(0.5f, 0.5f, 0.5f));
             }
-            Gizmos.DrawCube(n.worldPos, Vector3.one);
         }
+            
     }
 }
 

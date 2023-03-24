@@ -70,6 +70,7 @@ public class TileInfo : MonoBehaviour
             tileHasTower = false;
             EnebleNode();
         }
+        GameObject.Find("AStarGrid").GetComponent<AStarGrid>().CheckGrid();
     }
 
 }

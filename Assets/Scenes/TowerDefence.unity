@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 205877101}
   - component: {fileID: 205877100}
   m_Layer: 0
-  m_Name: Capsule (1)
+  m_Name: target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -665,6 +665,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1131482255}
   - component: {fileID: 1131482254}
+  - component: {fileID: 1131482256}
   m_Layer: 0
   m_Name: AStarGrid
   m_TagString: Untagged
@@ -687,7 +688,7 @@ MonoBehaviour:
   map: {fileID: 2118166066}
   unwalkableMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   enemies:
   - {fileID: 1947454679}
   - {fileID: 205877103}
@@ -706,6 +707,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1131482256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131482253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 716a895e398354f77bfa802df23c8cd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  start: {fileID: 1947454679}
+  target: {fileID: 205877103}
+  grid: {fileID: 1131482254}
 --- !u!1 &1463003357
 GameObject:
   m_ObjectHideFlags: 0
@@ -1109,7 +1125,7 @@ GameObject:
   - component: {fileID: 1947454677}
   - component: {fileID: 1947454676}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
