@@ -5,6 +5,15 @@ using UnityEngine;
 
 public class TowerScript : MonoBehaviour
 {
+    public enum Direction
+    {
+        Forward,
+        Backward,
+        Up,
+        Down,
+    }
+    public Direction direction;
+
     public Tower TowerType;
 
     public float timeSinceLastShoot;
@@ -45,11 +54,20 @@ public class TowerScript : MonoBehaviour
         
     }
 
-    /*public Vector2 TryToAim(Vector2 PointA, Vector2 PointB, GameObject Enemy)
+    public void TryToAim(Vector2 PointA, Vector2 PointB, GameObject Enemy)
     {
-        float test = 
-    }*/
-
-    
-
+        switch (direction)
+        {
+            case Direction.Forward:
+                break;
+            case Direction.Backward:
+                break;
+            case Direction.Up:
+                break;
+            case Direction.Down:
+                break;
+            default:
+                break;
+        }
+    }
 }
