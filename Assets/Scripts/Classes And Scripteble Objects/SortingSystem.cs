@@ -2,24 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SortingSystem : MonoBehaviour
+public class SortingSystem: MonoBehaviour
 {
     public List<Enemy> targetedEnemies;
     public TowerPriority priority;
 
     void Update()
     {
-        // Sorter fjender baseret på prioritet
-        if (priority == TowerPriority.Health)
-        {
-            targetedEnemies.Sort((a, b) => a.health.CompareTo(b.health));
-        }
-        else if (priority == TowerPriority.Speed)
-        {
-            targetedEnemies.Sort((a, b) => a.speed.CompareTo(b.speed));
-        }
+        BubbleSort(targetedEnemies, priority);
 
-        // Angrib den første fjende på listen hvis der er nogen
+        // Angrib den første fjende på listen, hvis der er nogen
         if (targetedEnemies.Count > 0)
         {
             Attack(targetedEnemies[0]);
@@ -47,6 +39,45 @@ public class SortingSystem : MonoBehaviour
     void Attack(Enemy enemy)
     {
         // Angrib fjenden
+    }
+
+    public void BubbleSort(List<Enemy> list, TowerPriority priority)
+    {
+        int n = list.Count;
+        bool swapped;
+
+        do
+        {
+            swapped = false;
+
+            for (int i = 0; i < n - 1; i++)
+            {
+                if (priority == TowerPriority.Health)
+                {
+                    if (list[i].health > list[i + 1].health)
+                    {
+                        // Swap fjenderne på position i og i + 1
+                        Enemy temp = list[i];
+                        list[i] = list[i + 1];
+                        list[i + 1] = temp;
+
+                        swapped = true;
+                    }
+                }
+                else if (priority == TowerPriority.Speed)
+                {
+                    if (list[i].speed > list[i + 1].speed)
+                    {
+                        // Swap fjenderne på position i og i + 1
+                        Enemy temp = list[i];
+                        list[i] = list[i + 1];
+                        list[i + 1] = temp;
+
+                        swapped = true;
+                    }
+                }
+            }
+        } while (swapped);
     }
 }
 
