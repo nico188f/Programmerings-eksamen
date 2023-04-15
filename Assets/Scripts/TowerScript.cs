@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
+//kilde: https://www.youtube.com/watch?v=2zVwug_agr0
 public class TowerScript : MonoBehaviour
 {
     public enum Direction
@@ -24,6 +25,10 @@ public class TowerScript : MonoBehaviour
 
     public TileInfo ParentTileScript;
 
+    public GameObject TargetEnemy;
+
+    public GameObject Projectile;
+
     private void OnMouseUp()
     {
         ParentTileScript.DestroyTowerOnTile();
@@ -32,6 +37,7 @@ public class TowerScript : MonoBehaviour
     private void Start()
     {
         GetComponent<SpriteRenderer>().color = TowerType.color;
+        TargetEnemy = GameObject.Find("Enemy (1)");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -53,15 +59,19 @@ public class TowerScript : MonoBehaviour
     private void Update()
     {
         timeSinceLastShoot += Time.deltaTime;
-        if (timeSinceLastShoot > TowerType.secondsBetweenShoots && EnemysInRange.Count > 0)
+        if (timeSinceLastShoot > TowerType.secondsBetweenShoots) // && EnemysInRange.Count > 0
         {
-            //Fire(TargetEnemy)
+            timeSinceLastShoot -= TowerType.secondsBetweenShoots;
+            Fire(TargetEnemy);
         }
     }
 
     public void Fire(GameObject Enemy)
     {
+        GameObject ProjectileInstance = Instantiate(Projectile, new Vector3(transform.position.x,transform.position.y ,-1), Quaternion.identity);
+        InterceptionDirection(TargetEnemy.transform.position, transform.position, TargetEnemy.GetComponent<Rigidbody2D>().velocity, TowerType.projectile.speed, out Vector2 direction);
         
+        ProjectileInstance.GetComponent<Rigidbody2D>().velocity = direction * TowerType.projectile.speed;
     }
 
     public void TryToAim(Vector2 PointA, Vector2 PointB, GameObject Enemy)
@@ -69,24 +79,23 @@ public class TowerScript : MonoBehaviour
         
     }
 
-    public bool InterceptionDirection(GameObject Enemy, out Vector2 Result)
+    public bool InterceptionDirection(Vector2 A, Vector2 B, Vector2 VA, float sB, out Vector2 result)
     {
-        Vector2 TowerToEnemy = GetComponent<Transform>().position - Enemy.GetComponent<Transform>().position;
-        float distanceBetweenTowerAndEnemy = TowerToEnemy.magnitude;
-
-        float angleBetweenTowerEnemyAndEnemyDestination = Vector2.Angle(TowerToEnemy, Enemy.GetComponent<Rigidbody2D>().velocity) * Mathf.Deg2Rad;
-        float ratio = Enemy.GetComponent<EnemyScipt>().Enemy.speed / TowerType.projectile.speed;
-
-        if (SolveQuadratic(1 - ratio * ratio, 2 * ratio * distanceBetweenTowerAndEnemy * Mathf.Cos(angleBetweenTowerEnemyAndEnemyDestination),
-            0 - (Mathf.Pow(distanceBetweenTowerAndEnemy, 2)), out float root1, out float root2) == 0)
+        Vector2 AToB = B - A;
+        float lC = AToB.magnitude;
+        float alpha = Vector2.Angle(AToB, VA) * Mathf.Rad2Deg;
+        float sA = VA.magnitude;
+        float r = sA / sB;
+        if (SolveQuadratic(1 - r * r, 2 * r * lC * Mathf.Cos(alpha), -(lC * lC), out float root1, out float root2) == 0)
         {
-            Result = Vector2.zero;
+            result = Vector2.zero;
+            Debug.Log(false);
             return false;
         }
-        float DistancebetweenInterceptionPointAndTower = Mathf.Max(root1, root2);
-        float Time = DistancebetweenInterceptionPointAndTower / TowerType.projectile.speed;
-        Vector2 InterceptionPoint = Enemy.GetComponent<Transform>().position * Enemy.GetComponent<Rigidbody2D>().velocity * Time;
-        Result = (InterceptionPoint - new Vector2(GetComponent<Transform>().position.x, GetComponent<Transform>().position.y)).normalized;
+        float lA = Mathf.Max(root1, root2);
+        float t = lA / sB;
+        Vector2 C = A + VA * t;
+        result = (C - B).normalized;
         return true;
     }
 
@@ -100,7 +109,7 @@ public class TowerScript : MonoBehaviour
             return 0;
         }
         root1 = (-b + Mathf.Sqrt(discriminant)) / (2 * a);
-        root2 = (+b + Mathf.Sqrt(discriminant)) / (2 * a);
+        root2 = (-b - Mathf.Sqrt(discriminant)) / (2 * a);
         return discriminant > 0 ? 2 : 1;
     }
 }
