@@ -666,6 +666,7 @@ GameObject:
   - component: {fileID: 1131482255}
   - component: {fileID: 1131482254}
   - component: {fileID: 1131482256}
+  - component: {fileID: 1131482257}
   m_Layer: 0
   m_Name: AStarGrid
   m_TagString: Untagged
@@ -719,9 +720,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 716a895e398354f77bfa802df23c8cd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  start: {fileID: 1947454679}
-  target: {fileID: 205877103}
   grid: {fileID: 1131482254}
+--- !u!114 &1131482257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131482253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0d7f7412415e45bd886acf56b2cc00f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1463003357
 GameObject:
   m_ObjectHideFlags: 0
@@ -1124,6 +1135,7 @@ GameObject:
   - component: {fileID: 1947454678}
   - component: {fileID: 1947454677}
   - component: {fileID: 1947454676}
+  - component: {fileID: 1947454680}
   m_Layer: 0
   m_Name: start
   m_TagString: Untagged
@@ -1210,6 +1222,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1947454680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947454675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 322eec4c1e26c435db1517aff7b7c189, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 205877103}
 --- !u!1 &2118166065
 GameObject:
   m_ObjectHideFlags: 0

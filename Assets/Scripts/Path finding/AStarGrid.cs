@@ -13,8 +13,7 @@ public class AStarGrid : MonoBehaviour
 
     float nodeRadius = 1;
     Node[,] grid;
-    void Start()
-
+    void Awake()
     {
         nodeDiameter = nodeRadius * 2;
         gridSizeX = Mathf.RoundToInt(map.mapWidth/ nodeRadius);
@@ -83,6 +82,14 @@ public class AStarGrid : MonoBehaviour
 
 
     }
+
+    public int MaxSize
+    {
+        get
+        {
+            return gridSizeX * gridSizeY;
+        }
+    }
     public List<Node> path;
 
     void OnDrawGizmos()
@@ -100,7 +107,7 @@ public class AStarGrid : MonoBehaviour
                         Gizmos.color = Color.black;
                 }
 
-                Gizmos.DrawCube(n.worldPos, new Vector3(0.5f, 0.5f, 0.5f));
+                Gizmos.DrawCube(n.worldPosition, new Vector3(0.5f, 0.5f, 0.5f));
             }
         }
             
