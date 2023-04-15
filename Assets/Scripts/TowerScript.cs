@@ -22,6 +22,13 @@ public class TowerScript : MonoBehaviour
     public float timeSinceLastShoot;
     public List<GameObject> EnemysInRange = new List<GameObject>();
 
+    public TileInfo ParentTileScript;
+
+    private void OnMouseUp()
+    {
+        ParentTileScript.DestroyTowerOnTile();
+    }
+
     private void Start()
     {
         GetComponent<SpriteRenderer>().color = TowerType.color;

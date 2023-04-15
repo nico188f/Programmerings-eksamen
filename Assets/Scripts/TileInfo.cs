@@ -57,9 +57,11 @@ public class TileInfo : MonoBehaviour
 
     private void OnMouseUp()
     {
+
         if (TowerPlacementUiManager.SelectedTower != null && !tileHasTower)
         {
             TowerGameObject = Instantiate(TowerPrefab, transform);
+            TowerGameObject.GetComponent<TowerScript>().ParentTileScript = this;
             TowerGameObject.GetComponent<TowerScript>().TowerType = TowerPlacementUiManager.SelectedTower;
             TowerGameObject.GetComponent<Transform>().localPosition = new Vector2(0, 0);
             tileHasTower = true;
@@ -68,11 +70,17 @@ public class TileInfo : MonoBehaviour
         }
         else if (TowerPlacementUiManager.SelectedTower == null &&  tileHasTower)
         {
-            Destroy(TowerGameObject);
-            tileHasTower = false;
-            EnebleNode();
+            DestroyTowerOnTile();
         }
         GameObject.Find("AStarGrid").GetComponent<AStarGrid>().CheckGrid();
+    }
+
+    public void DestroyTowerOnTile()
+    {
+        Debug.Log(TowerGameObject);
+        Destroy(TowerGameObject);
+        tileHasTower = false;
+        EnebleNode();
     }
 
 }

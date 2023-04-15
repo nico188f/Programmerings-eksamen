@@ -47,7 +47,6 @@ public class PathFinding2 : MonoBehaviour
             CurrentlyDesignatingManhattanDistances.Clear();
             foreach (TileInfo node in NextWaveOfDesignatingManhattanDistances)
             {
-                Debug.Log(node);
                 CurrentlyDesignatingManhattanDistances.Add(node);
             }
             NextWaveOfDesignatingManhattanDistances.Clear();
