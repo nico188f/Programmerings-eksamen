@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
+    //https://youtu.be/I6T1En5cPq4
     public GameObject MapTile;
 
     public int mapWidth;
@@ -62,31 +63,23 @@ public class MapGenerator : MonoBehaviour
 
     private void FindNeighbors(int tileId)
     {
-        //checks if the tile is on the buttom edge
         if (tileId >= mapWidth)
         {
-            //adds tile below
             mapTileInfoScripts[tileId].NeighborIDs.Add(tileId - mapWidth);
             mapTileInfoScripts[tileId].WalkebleNeighborIDs.Add(tileId - mapWidth);
         }
-        //checks if the tile is on the top edge
         if (tileId < mapWidth * (mapHight - 1))
         {
-            //adds tile above
             mapTileInfoScripts[tileId].NeighborIDs.Add(tileId + mapWidth);
             mapTileInfoScripts[tileId].WalkebleNeighborIDs.Add(tileId + mapWidth);
         }
-        //checks if the tile is on the left edge
         if (!(tileId % mapWidth == 0))
         {
-            //adds tile to the right
             mapTileInfoScripts[tileId].NeighborIDs.Add(tileId - 1);
             mapTileInfoScripts[tileId].WalkebleNeighborIDs.Add(tileId - 1);
         }
-        //checks if the tile is on the right edge
         if (!((tileId + 1) % mapWidth == 0))
         {
-            //adds tile to the left
             mapTileInfoScripts[tileId].NeighborIDs.Add(tileId + 1);
             mapTileInfoScripts[tileId].WalkebleNeighborIDs.Add(tileId + 1);
         }
