@@ -6,9 +6,11 @@ using UnityEngine.Pool;
 public class TileInfo : MonoBehaviour
 {
     
+
     public int tileID;
     public List<int> NeighborIDs = new List<int>();
     public List<int> WalkebleNeighborIDs = new List<int>();
+    public int manhattanDistance = -1;
 
     public GameObject TowerPrefab;
     public GameObject TowerPreviewPrefab;

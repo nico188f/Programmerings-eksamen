@@ -46,6 +46,8 @@ public class MapGenerator : MonoBehaviour
                 int tileID = y * mapWidth + x;
                 GameObject newTile = Instantiate(MapTile);
 
+                newTile.GetComponent<TileInfo>().tileID = tileID;
+
                 mapTiles.Add(newTile);
                 mapTileInfoScripts.Add(newTile.GetComponent<TileInfo>());
 
