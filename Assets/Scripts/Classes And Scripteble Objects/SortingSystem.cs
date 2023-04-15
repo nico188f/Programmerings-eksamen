@@ -38,7 +38,7 @@ public class SortingSystem: MonoBehaviour
 
     void Attack(Enemy enemy)
     {
-        // Angrib fjenden
+        // Angrib enemy
     }
 
     public void BubbleSort(List<Enemy> list, TowerPriority priority)
@@ -56,7 +56,6 @@ public class SortingSystem: MonoBehaviour
                 {
                     if (list[i].health > list[i + 1].health)
                     {
-                        // Swap fjenderne på position i og i + 1
                         Enemy temp = list[i];
                         list[i] = list[i + 1];
                         list[i + 1] = temp;
@@ -68,7 +67,6 @@ public class SortingSystem: MonoBehaviour
                 {
                     if (list[i].speed > list[i + 1].speed)
                     {
-                        // Swap fjenderne på position i og i + 1
                         Enemy temp = list[i];
                         list[i] = list[i + 1];
                         list[i + 1] = temp;
