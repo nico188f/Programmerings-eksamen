@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   color: {r: 1, g: 0.9284806, b: 0, a: 1}
   range: 0
-  secondsBetweenShoots: 0
-  projectile: {fileID: 0}
+  secondsBetweenShoots: 1
+  projectile: {fileID: 11400000, guid: c8a6165023644b846b1348a4fac6295a, type: 2}
