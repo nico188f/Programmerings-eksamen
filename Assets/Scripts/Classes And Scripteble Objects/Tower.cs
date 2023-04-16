@@ -10,3 +10,4 @@ public class Tower : ScriptableObject
     public float secondsBetweenShoots;
     public Projectile projectile;
 }
+
